@@ -1,16 +1,24 @@
 require 'rubygems'
 require 'rake'
+require 'metric_fu'
 
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "bit-engine"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{A BitTorrent client built with Ruby and EventMachine}
+    gem.description = %Q{A BitTorrent client build with Ruby and Eventmachine}
     gem.email = "bobby.potter@gmail.com"
     gem.homepage = "http://github.com/bpot/bit-engine"
     gem.authors = ["Bob Potter"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
+    gem.add_dependency  "eventmachine" 
+    gem.add_dependency  "thin" 
+    gem.add_dependency  "sinatra" 
+    gem.add_dependency  "mmap" 
+    gem.add_dependency  "bencode" 
+    gem.add_dependency  "json" 
+    gem.add_dependency  "rest-client" 
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError
@@ -41,4 +49,10 @@ Rake::RDocTask.new do |rdoc|
   rdoc.title = "bit-engine #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
+end
+
+namespace :daemon do
+  task :start do
+
+  end
 end
