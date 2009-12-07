@@ -1,0 +1,24 @@
+REFACTORING
+* peer talks directly to piece picker
+* peer connection manager (Swarm?)
+
+OTHER STUFF
+* Document TorrentManager class
+* Torrent#on_complete callback
+* PeerConnction -- reconnecting
+* know if a peer is seeding or leeching and act accordingly (i.e. disconnect from a seeding peer if we're seeding too)
+* command line client
+  - expose files
+* configuration file
+* global choke algo!
+* handle blocks at the torrent data level so we can download a piece from multiple peers
+* sanity check peers
+* break up/down rate out into own class
+* handle last rate for rate measure?
+* rename torrent_manager to torrent_client
+* Sanity checking in protcol buffer
+* TorrentTracker -- tracker_id
+* TorrentTracker -- retry
+* start/end game algo
+* hashing w/o blocking
+* web ui

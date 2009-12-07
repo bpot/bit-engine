@@ -1,0 +1,32 @@
+= Bit-Engine
+
+A BitTorrent client built with Ruby and EventMachine.
+
+Bit-Engine is still experimental.  It is just at the point where you can download torrents with it.
+
+= Usage
+
+# Starting the daemon
+
+bte_daemon [download_path] [port] 
+
+# Adding a torrent
+
+bte_client add [path]
+
+# Summary Status
+
+bte_client status
+
+# Starting/Stopping a torrent
+
+bte_client start [info_hash]
+bte_client stop  [info_hash]
+
+# Torrent Peers 
+
+bte_client peers [info_hash]
+
+= License
+
+Ruby License, http://www.ruby-lang.org/en/LICENSE.txt.

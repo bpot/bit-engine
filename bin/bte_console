@@ -1,0 +1,50 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'restclient'
+require 'json'
+require 'curses'
+
+STATUS_FIELDS = [["name", 25],["state", 8],["completed", 12], ["info_hash",41], ["uploaded", 12], ["downloaded", 12]]
+
+case ARGV[0]
+when 'add' 
+  RestClient.post 'http://localhost:8080/torrents', { "path" => ARGV[1]}
+when 'stop'
+  RestClient.put "http://localhost:8080/torrent/#{ARGV[1]}", {  "action" => "stop" }
+when 'start'
+  RestClient.put "http://localhost:8080/torrent/#{ARGV[1]}", {  "action" => "start" }
+when 'status'
+  json = RestClient.get 'http://localhost:8080/torrents'
+  hash = JSON.parse(json)
+  print "Rates - Up: #{hash["up_rate"]} - Down: #{hash["down_rate"]}\n\n"
+  STATUS_FIELDS.each do |f,size|
+    print f.ljust(size)
+  end
+  print "\n"
+  print "-" * 120
+  print "\n"
+  if hash["torrents"].any?
+    hash["torrents"].each do |torrent|
+      STATUS_FIELDS.each do |f, size|
+        print torrent[f].to_s[0..(size-2)].ljust(size)
+      end
+      print "\n"
+    end
+  else
+    print "No torrents\n"
+  end
+when 'peers'
+  peers = JSON.parse(RestClient.get "http://localhost:8080/torrent/#{ARGV[1]}/peers")
+  p peers
+  fields = [["port", 15],["ip",10],["amount_completed", 20],["uploaded",10],["downloaded",15],["am_choking", 15],["peer_choking", 15],["am_interested",15],["peer_interested", 18]]
+  fields.each do |f,size|
+    print f.ljust(size)
+  end
+  print "\n"
+  peers.each do |peer|
+    fields.each do |f,size|
+      print peer[f].to_s.ljust(size)
+    end
+    print "\n"
+  end
+end

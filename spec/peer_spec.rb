@@ -1,4 +1,4 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe "BitEngine" do
+describe "Peer" do
 end
